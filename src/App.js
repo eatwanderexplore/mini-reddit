@@ -1,5 +1,6 @@
 import './App.css';
 import { RouterProvider } from 'react-router-dom';
+import DropdownMenu from './features/subreddit/subredditDropdown';
 
 function App() {
   return (
@@ -7,6 +8,9 @@ function App() {
       <header className="App-header">
         Header
       </header>
+      <div className='dropdown'>
+        <DropdownMenu />
+      </div>
     </div>
   );
 }
