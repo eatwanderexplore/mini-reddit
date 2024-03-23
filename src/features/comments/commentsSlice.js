@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const loadCommentsForPostId = createAsyncThunk(
     'comments/loadCommentsForPostId',
     async (id) => {
-        const response = await fetch(`${URL}/comments`);
+        const response = await fetch(`${URL}/comments`); //update URL!
         const json = await response.json();
         return json;
     }
