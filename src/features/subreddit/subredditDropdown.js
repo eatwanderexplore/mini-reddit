@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const DropdownMenu = () => {
+const DropdownMenu = ({ onTopicSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [topics, setTopics] = useState([]);
 
@@ -19,23 +19,24 @@ const DropdownMenu = () => {
     fetchTopics();
   }, []);
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+  const handleTopicSelect = (topic) => {
+    setIsOpen(false);
+    onTopicSelect(topic); // Pass the selected topic to the parent component
   };
 
   return (
     <div className="dropdown">
-      <button className="dropdown-toggle" onClick={toggleDropdown}>
-        choose a topic
+      <button className="dropdown-toggle" onClick={() => setIsOpen(!isOpen)}>
+        Choose a topic
       </button>
       {isOpen && (
         <div className="dropdown-menu">
           <ul>
             {topics.map((topic, index) => (
               <li key={index}>
-                <a href={`https://www.reddit.com/${topic.display_name_prefixed}`} target="_blank" rel="noopener noreferrer">
+                <button onClick={() => handleTopicSelect(topic)}>
                   {topic.display_name}
-                </a>
+                </button>
               </li>
             ))}
           </ul>
