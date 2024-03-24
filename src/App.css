@@ -17,11 +17,16 @@
   background-color: #282c34;
   min-height: 10vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  text-align: left;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(247, 3, 3);
+}
+
+.reddit-icon {
+  margin-right: 10px;
 }
 
 .App-link {
