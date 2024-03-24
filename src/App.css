@@ -16,8 +16,7 @@
 .App-header {
   background-color: #282c34;
   min-height: 10vh;
-  display: flex;
-  flex-direction: row;
+  display: inline-flex;
   text-align: left;
   align-items: center;
   justify-content: flex-start;
@@ -27,6 +26,10 @@
 
 .reddit-icon {
   margin-right: 10px;
+}
+
+.search {
+  margin-left: 100px;
 }
 
 .App-link {
