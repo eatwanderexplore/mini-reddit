@@ -1,0 +1,16 @@
+.post-container ul {
+    list-style-type: none !important;
+}
+
+.post-image-container {
+    max-width: 100%; 
+    overflow: hidden; 
+  }
+  
+  .post-image-container .post-image {
+    max-width: 100%;
+    height: auto; 
+    display: block;
+    object-fit: contain; 
+  }
+  
