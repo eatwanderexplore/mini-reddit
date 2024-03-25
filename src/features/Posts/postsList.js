@@ -6,8 +6,9 @@ const PostsList = ({ subreddit }) => {
     useEffect(() => {
       const fetchPosts = async () => {
         try {
-          const response = await fetch(`https://www.reddit.com/r/${subreddit}/.json?limit=10`);
+          const response = await fetch(`https://www.reddit.com/r/${subreddit}.json`);
           const data = await response.json();
+          console.log('Fetched posts', data);
           setPosts(data.data.children.map(child => child.data));
         } catch (error) {
           console.error('Error fetching posts:', error);
