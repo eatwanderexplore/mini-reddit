@@ -30,7 +30,7 @@ const DropdownMenu = ({ onTopicSelect }) => {
   return (
     <div className="dropdown">
       <button className="dropdown-toggle" onClick={() => setIsOpen(!isOpen)}>
-        Choose a topic
+       {selectedTopic ? selectedTopic.display_name : "Choose a topic"}
       </button>
       {isOpen && (
         <div className="dropdown-menu">
