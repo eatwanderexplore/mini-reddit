@@ -4,12 +4,12 @@ export const fetchPostsFromSubreddit = createAsyncThunk(
     'subreddit/fetchPostsFromSubreddit',
     async (subreddit) => {
         try {
-            const response = await fetch(`https://www.reddit.com/r/${subreddit}.json?limit=10`);
+            const response = await fetch(`https://www.reddit.com/${subreddit.url}.json?limit=10`);
             const data = await response.json();
             return data.data.children.map(child => child.data);
         } catch (error) {
             console.error('Error fetching posts:', error);
-            throw error; // Re-throw the error for error handling
+            throw error;
         }
     }
 );

@@ -1,36 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchPostsFromSubreddit, selectPosts, isLoadingPosts } from "../subreddit/subredditSlice";
 
 const PostsList = ({ subreddit }) => {
-    const [posts, setPosts] = useState([]);
-  
-    useEffect(() => {
-      const fetchPosts = async () => {
-        try {
-          const response = await fetch(`https://www.reddit.com/r/${subreddit}.json`);
-          const data = await response.json();
-          console.log('Fetched posts', data);
-          setPosts(data.data.children.map(child => child.data));
-        } catch (error) {
-          console.error('Error fetching posts:', error);
-        }
-      };
-  
-      fetchPosts();
-    }, [subreddit]);
+  const dispatch = useDispatch();
+  const posts = useSelector(selectPosts);
+  const loading = useSelector(isLoadingPosts);
 
-    return (
-        <div>
-        
-                <ul>
-                    {posts.map((post) => (
-                        <li key={post.id}>
-                            <a href={post.url} target='_blank' rel='noopener noreferrer'>{post.title}</a>
-                        </li>
-                    ))}
-                </ul>
-            
-        </div>
-    )
+  useEffect(() => {
+    dispatch(fetchPostsFromSubreddit(subreddit));
+  }, [dispatch, subreddit]);
+
+  return (
+    <div>
+      {loading && <p>Loading...</p>}
+      {!loading && (
+        <ul>
+          {posts.map((post) => (
+            <li key={post.id}>
+              <a href={post.url} target='_blank' rel='noopener noreferrer'>{post.title}</a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
 };
 
 export default PostsList;

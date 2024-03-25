@@ -4,6 +4,7 @@ import './subredditDropdown.css';
 const DropdownMenu = ({ onTopicSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [topics, setTopics] = useState([]);
+  const [selectedTopic, setSelectedTopic ] = useState(null);
 
   useEffect(() => {
     const fetchTopics = async () => {
@@ -22,7 +23,8 @@ const DropdownMenu = ({ onTopicSelect }) => {
 
   const handleTopicSelect = (topic) => {
     setIsOpen(false);
-    onTopicSelect(topic); // Pass the selected topic to the parent component
+    setSelectedTopic(topic);
+    onTopicSelect(topic);
   };
 
   return (
