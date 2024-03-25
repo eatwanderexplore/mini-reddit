@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './subredditDropdown.css';
 
 const DropdownMenu = ({ onTopicSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
