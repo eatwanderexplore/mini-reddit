@@ -6,7 +6,7 @@ export const loadCommentsForPostId = createAsyncThunk(
         try {
             console.log("subredditUrl: ", subredditUrl);
             console.log("postId: ", postId);
-            const response = await fetch(`https://www.reddit.com/r/${subredditUrl}/comments/${postId}.json`);
+            const response = await fetch(`https://www.reddit.com/${subredditUrl}/comments/${postId}.json`);
             const data = await response.json();
             return { postId, comments: data };
         } catch (error) {

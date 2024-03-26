@@ -2,14 +2,16 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loadCommentsForPostId, selectComments, isLoadingComments } from "../comments/commentsSlice";
 
-const Comments = ({ postId, subredditUrl }) => {
+const Comments = ({ subredditUrl, postId }) => {
   const dispatch = useDispatch();
   const comments = useSelector(selectComments);
   const loading = useSelector(isLoadingComments);
 
   useEffect(() => {
-    dispatch(loadCommentsForPostId({ subreddit: { url: subredditUrl }, postId }));
-  }, [dispatch, postId, subredditUrl]);
+    dispatch(loadCommentsForPostId({ subredditUrl, postId }));
+  }, [dispatch, subredditUrl, postId]);
+
+  console.log("comments[postId]: ", comments[postId]);
 
   return (
     <div>
