@@ -2,10 +2,17 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const loadCommentsForPostId = createAsyncThunk(
     'comments/loadCommentsForPostId',
-    async (id) => {
-        const response = await fetch(`${URL}/comments`); //update URL!
-        const json = await response.json();
-        return json;
+    async ({ subredditUrl, postId }) => {
+        try {
+            console.log("subredditUrl: ", subredditUrl);
+            console.log("postId: ", postId);
+            const response = await fetch(`https://www.reddit.com/r/${subredditUrl}/comments/${postId}.json`);
+            const data = await response.json();
+            return { postId, comments: data };
+        } catch (error) {
+            console.error('Error fetching comments:', error);
+            throw error;
+        }
     }
 );
 
@@ -24,9 +31,10 @@ export const commentsSlice = createSlice({
                 state.failedToLoadComments = false;
             })
             .addCase(loadCommentsForPostId.fulfilled, (state, action) => {
+                const { postId, comments } = action.payload;
                 state.isLoadingComments = false;
                 state.failedToLoadComments = false;
-                state.byPostId[action.payload.postId] = action.payload.comments;
+                state.byPostId[postId] = comments || [];
             })
             .addCase(loadCommentsForPostId.rejected, (state, action) => {
                 state.isLoadingComments = false;

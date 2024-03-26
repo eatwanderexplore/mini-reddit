@@ -4,6 +4,7 @@ export const fetchPostsFromSubreddit = createAsyncThunk(
     'subreddit/fetchPostsFromSubreddit',
     async (subreddit) => {
         try {
+            console.log('subredditURL:', subreddit.url);
             const response = await fetch(`https://www.reddit.com/${subreddit.url}.json?limit=10`);
             const data = await response.json();
             return data.data.children.map(child => child.data);

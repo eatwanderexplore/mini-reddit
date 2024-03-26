@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPostsFromSubreddit, selectPosts, isLoadingPosts } from "../subreddit/subredditSlice";
+import Comments from "../comments/comments";
 
 const PostsList = ({ subreddit }) => {
   const dispatch = useDispatch();
@@ -10,6 +11,15 @@ const PostsList = ({ subreddit }) => {
   useEffect(() => {
     dispatch(fetchPostsFromSubreddit(subreddit));
   }, [dispatch, subreddit]);
+
+  const [expandedComments, setExpandedComments] = useState({});
+
+  const toggleComments = (postId) => {
+    setExpandedComments(prevState => ({
+      ...prevState,
+      [postId]: !prevState[postId]
+    }));
+  };
 
   return (
     <div>
@@ -26,6 +36,14 @@ const PostsList = ({ subreddit }) => {
               </div>
             )}
               <p>{post.selftext}</p>
+              <button onClick={() => toggleComments(post.id)}>
+                {expandedComments[post.id] ? "Hide Comments" : "Show Comments"}
+              </button>
+              {expandedComments[post.id] && (
+                <div className="comments-container">
+                  <Comments postId={post.id} />
+                </div>
+              )}
             </li>
           ))}
         </ul>
