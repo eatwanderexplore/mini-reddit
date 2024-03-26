@@ -1,10 +1,12 @@
-import { configureStore } from "@reduxjs/toolkit";
-import subredditReducer from "./subredditSlice";
-import commentsReducer from './commentsSlice';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import redditReducer from './redditSlice';
+import subredditReducer from './subredditSlice';
 
-export const store = configureStore({
-    reducer: {
-        comments: commentsReducer,
-        subreddit: subredditReducer,
-    }
+const store = configureStore({
+  reducer: combineReducers({
+    reddit: redditReducer,
+    subreddits: subredditReducer,
+  }),
 });
+
+export default store;

@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { getSubreddits } from '../../api/reddit';
 import './subredditDropdown.css';
 
 const DropdownMenu = ({ onSubredditSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [subreddits, setSubreddits] = useState([]);
-  const [selectedSubreddit, setSelectedSubreddit ] = useState(null);
+  const [selectedSubreddit, setSelectedSubreddit] = useState(null);
 
   useEffect(() => {
     const fetchSubreddits = async () => {
       try {
-        const response = await fetch('https://www.reddit.com/subreddits.json?limit=10');
-        const data = await response.json();
-        const subredditsList = data.data.children.map(child => child.data);
+        // Call the getSubreddits function to fetch subreddits
+        const subredditsList = await getSubreddits();
         setSubreddits(subredditsList);
       } catch (error) {
-        console.error('Error fetching topics:', error);
+        console.error('Error fetching subreddits:', error);
       }
     };
 
