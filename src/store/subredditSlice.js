@@ -1,13 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { getSubredditPosts } from "../api/reddit";
 
 export const fetchPostsFromSubreddit = createAsyncThunk(
     'subreddit/fetchPostsFromSubreddit',
     async (subreddit) => {
         try {
-            console.log('subredditURL:', subreddit.url);
-            const response = await fetch(`https://www.reddit.com/${subreddit.url}.json?limit=10`);
-            const data = await response.json();
-            return data.data.children.map(child => child.data);
+            const posts = await getSubredditPosts(subreddit);
+            return posts;
         } catch (error) {
             console.error('Error fetching posts:', error);
             throw error;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchPostsFromSubreddit, selectPosts, isLoadingPosts } from "../subreddit/subredditSlice";
+import { fetchPostsFromSubreddit, selectPosts, isLoadingPosts } from "../../store/subredditSlice";
 import Comments from "../comments/comments";
 
 const PostsList = ({ subreddit }) => {

@@ -7,10 +7,10 @@ import PostsList from './features/Posts/postsList';
 import React, {useState} from 'react';
 
 function App() {
-  const [selectedTopic, setSelectedTopic] = useState(null);
+  const [selectedSubreddit, setSelectedSubreddit] = useState(null);
 
-  const handleTopicSelect = (topic) => {
-    setSelectedTopic(topic);
+  const handleSubredditSelect = (subreddit) => {
+    setSelectedSubreddit(subreddit);
   };
 
   return (
@@ -28,8 +28,8 @@ function App() {
       </header>
      
       <div className='dropdown'>
-        <DropdownMenu onTopicSelect={handleTopicSelect}/>
-        {selectedTopic && <PostsList subreddit={selectedTopic} />}
+        <DropdownMenu onSubredditSelect={handleSubredditSelect}/>
+        {selectedSubreddit && <PostsList subreddit={selectedSubreddit} />}
       </div>
     </div>
   );

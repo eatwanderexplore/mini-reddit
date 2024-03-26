@@ -1,14 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { getPostComments } from "../api/reddit";
 
 export const loadCommentsForPostId = createAsyncThunk(
     'comments/loadCommentsForPostId',
-    async ({ subredditUrl, postId }) => {
+    async ({ subreddit }) => {
         try {
-            console.log("subredditUrl: ", subredditUrl);
-            console.log("postId: ", postId);
-            const response = await fetch(`https://www.reddit.com/${subredditUrl}/comments/${postId}.json`);
+            const response = await getPostComments(subreddit)
             const data = await response.json();
-            return { postId, comments: data };
+            return { comments: data };
         } catch (error) {
             console.error('Error fetching comments:', error);
             throw error;

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { loadCommentsForPostId, selectComments, isLoadingComments } from "../comments/commentsSlice";
+import { loadCommentsForPostId, selectComments, isLoadingComments } from "../../store/commentsSlice";
 
 const Comments = ({ subredditUrl, postId }) => {
   const dispatch = useDispatch();

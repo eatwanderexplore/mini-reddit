@@ -1,44 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import './subredditDropdown.css';
 
-const DropdownMenu = ({ onTopicSelect }) => {
+const DropdownMenu = ({ onSubredditSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [topics, setTopics] = useState([]);
-  const [selectedTopic, setSelectedTopic ] = useState(null);
+  const [subreddits, setSubreddits] = useState([]);
+  const [selectedSubreddit, setSelectedSubreddit ] = useState(null);
 
   useEffect(() => {
-    const fetchTopics = async () => {
+    const fetchSubreddits = async () => {
       try {
         const response = await fetch('https://www.reddit.com/subreddits.json?limit=10');
         const data = await response.json();
-        const topicsList = data.data.children.map(child => child.data);
-        setTopics(topicsList);
+        const subredditsList = data.data.children.map(child => child.data);
+        setSubreddits(subredditsList);
       } catch (error) {
         console.error('Error fetching topics:', error);
       }
     };
 
-    fetchTopics();
+    fetchSubreddits();
   }, []);
 
-  const handleTopicSelect = (topic) => {
+  const handleSubredditSelect = (subreddit) => {
     setIsOpen(false);
-    setSelectedTopic(topic);
-    onTopicSelect(topic);
+    setSelectedSubreddit(subreddit);
+    onSubredditSelect(subreddit);
   };
 
   return (
     <div className="dropdown">
       <button className="dropdown-toggle" onClick={() => setIsOpen(!isOpen)}>
-       {selectedTopic ? selectedTopic.display_name : "Choose a topic"}
+       {selectedSubreddit ? selectedSubreddit.display_name : "Choose a topic"}
       </button>
       {isOpen && (
         <div className="dropdown-menu">
           <ul>
-            {topics.map((topic, index) => (
+            {subreddits.map((subreddit, index) => (
               <li key={index}>
-                <button onClick={() => handleTopicSelect(topic)}>
-                  {topic.display_name}
+                <button onClick={() => handleSubredditSelect(subreddit)}>
+                  {subreddit.display_name}
                 </button>
               </li>
             ))}
