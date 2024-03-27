@@ -10,7 +10,6 @@ const DropdownMenu = ({ onSubredditSelect }) => {
   useEffect(() => {
     const fetchSubreddits = async () => {
       try {
-        // Call the getSubreddits function to fetch subreddits
         const subredditsList = await getSubreddits();
         setSubreddits(subredditsList);
       } catch (error) {
