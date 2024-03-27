@@ -29,7 +29,7 @@ function App() {
      
       <div className='dropdown'>
         <DropdownMenu onSubredditSelect={handleSubredditSelect}/>
-        {selectedSubreddit && <PostsList subreddit={selectedSubreddit} />}
+        {selectedSubreddit && <PostsList selectedSubreddit={selectedSubreddit} />}
       </div>
     </div>
   );

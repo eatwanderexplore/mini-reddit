@@ -1,16 +1,19 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchPosts, selectFilteredPosts, fetchComments, toggleShowingComments } from '../../store/redditSlice';
+import { fetchPosts, selectFilteredPosts, fetchComments, setSearchTerm, toggleShowingComments } from '../../store/redditSlice';
 import Comments from '../comments/comments';
 
-const PostsList = () => {
+const PostsList = ({selectedSubreddit}) => {
+  const reddit = useSelector((state) => state.reddit);
+  const { error, searchTerm } = reddit;
   const dispatch = useDispatch();
   const posts = useSelector(selectFilteredPosts);
-  console.log(posts);
 
   useEffect(() => {
-    dispatch(fetchPosts());
-  }, [dispatch]);
+    if (selectedSubreddit) {
+      dispatch(fetchPosts(selectedSubreddit.url));
+    }
+  }, [dispatch, selectedSubreddit]);
 
   const handleToggleComments = (index, permalink) => {
     dispatch(toggleShowingComments(index));
@@ -18,6 +21,31 @@ const PostsList = () => {
       dispatch(fetchComments(index, permalink));
     }
   };
+
+  if (error) {
+    return (
+      <div className="error">
+        <h2>Failed to load posts.</h2>
+        <button
+          type="button"
+          onClick={() => dispatch(fetchPosts(selectedSubreddit.url))}
+        >
+          Try again
+        </button>
+      </div>
+    );
+  }
+
+  if (posts.length === 0) {
+    return (
+      <div className="error">
+        <h2>No posts matching "{searchTerm}"</h2>
+        <button type="button" onClick={() => dispatch(setSearchTerm(''))}>
+          Go home
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div>
