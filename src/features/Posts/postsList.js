@@ -6,6 +6,7 @@ import Comments from '../comments/comments';
 const PostsList = () => {
   const dispatch = useDispatch();
   const posts = useSelector(selectFilteredPosts);
+  console.log(posts);
 
   useEffect(() => {
     dispatch(fetchPosts());
