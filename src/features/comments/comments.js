@@ -1,22 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-
-const Comments = ({ comment }) => {
-
-    const postComments = useSelector(state => state.reddit.posts[comment.id]?.comments || []);
-
-    console.log('postComments: ', postComments);
-
+const Comments = (props) => {
+    const { comment } = props;
+  
     return (
         <div>
-            <ul>
-                {postComments.map(comment => (
-                    <li key={comment.id}>
-                        <p>{comment.author}</p>
-                        <p>{comment.body}</p>
-                    </li>
-                ))}
-            </ul>
+            <p className="comment-author">{comment.author}</p>
+            <p className="comment-body">{comment.body}</p>
         </div>
     );
 };

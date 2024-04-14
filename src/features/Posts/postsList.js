@@ -55,16 +55,19 @@ const PostsList = ({selectedSubreddit}) => {
         {posts.map((post, index) => (
           <li key={post.id}>
             <h3>{post.title}</h3>
+            <div className="post-image-container">
+              <img src={post.url} alt="" className="post-image" />
+            </div>
             <p>{post.selftext}</p>
             <button onClick={() => handleToggleComments(index, post.permalink)}>
               {post.showingComments ? `Hide Comments (${post.comments.length})` : `Show Comments (${post.comments.length})`}
             </button>
             {post.showingComments && (
-              <ul>
+              <div>
                 {post.comments.map((comment) => (
                   <Comments comment={comment} key={comment.id} />
                 ))}
-              </ul>
+              </div>
             )}
           </li>
         ))}
