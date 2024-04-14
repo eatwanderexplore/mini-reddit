@@ -15,6 +15,7 @@ const PostsList = ({selectedSubreddit}) => {
     }
   }, [dispatch, selectedSubreddit]);
 
+
   const handleToggleComments = (index, permalink) => {
     dispatch(toggleShowingComments(index));
     if (!posts[index].showingComments) {
@@ -45,6 +46,7 @@ const PostsList = ({selectedSubreddit}) => {
         </button>
       </div>
     );
+
   }
 
   return (
@@ -55,14 +57,20 @@ const PostsList = ({selectedSubreddit}) => {
             <h3>{post.title}</h3>
             <p>{post.selftext}</p>
             <button onClick={() => handleToggleComments(index, post.permalink)}>
-              {post.showingComments ? 'Hide Comments' : 'Show Comments'}
+              {post.showingComments ? `Hide Comments (${post.comments.length})` : `Show Comments (${post.comments.length})`}
             </button>
-            {post.showingComments && <Comments comments={post.comments} />}
+            {post.showingComments && (
+              <ul>
+                {post.comments.map((comment) => (
+                  <Comments comment={comment} key={comment.id} />
+                ))}
+              </ul>
+            )}
           </li>
         ))}
       </ul>
     </div>
   );
-};
+};  
 
 export default PostsList;

@@ -1,28 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { getSubreddits } from '../../api/reddit';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSubreddits, selectSubreddits } from '../../store/subredditSlice';
 import './subredditDropdown.css';
 
 const DropdownMenu = ({ onSubredditSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [subreddits, setSubreddits] = useState([]);
-  const [selectedSubreddit, setSelectedSubreddit] = useState(null);
+  const dispatch = useDispatch();
+  const subreddits = useSelector(selectSubreddits);
+  const selectedSubreddit = useSelector((state) => state.reddit.selectedSubreddit);
 
   useEffect(() => {
-    const fetchSubreddits = async () => {
-      try {
-        const subredditsList = await getSubreddits();
-        setSubreddits(subredditsList);
-      } catch (error) {
-        console.error('Error fetching subreddits:', error);
-      }
-    };
-
-    fetchSubreddits();
-  }, []);
+    dispatch(fetchSubreddits());
+  }, [dispatch]);
 
   const handleSubredditSelect = (subreddit) => {
     setIsOpen(false);
-    setSelectedSubreddit(subreddit);
     onSubredditSelect(subreddit);
   };
 
