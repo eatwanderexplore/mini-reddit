@@ -1,79 +1,47 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchPosts, selectFilteredPosts, fetchComments, setSearchTerm, toggleShowingComments } from '../../store/redditSlice';
+import React from 'react';
 import Comments from '../comments/comments';
 
-const PostsList = ({selectedSubreddit}) => {
-  const reddit = useSelector((state) => state.reddit);
-  const { error, searchTerm } = reddit;
-  const dispatch = useDispatch();
-  const posts = useSelector(selectFilteredPosts);
+const PostsList = (props) => {
+  const {post, onToggleComments } = props;
 
-  useEffect(() => {
-    if (selectedSubreddit) {
-      dispatch(fetchPosts(selectedSubreddit.url));
+  const renderComments = () => {
+    if(post.showingComments) {
+      return (
+        <div>
+          {post.comments.map((comment) => (
+            <Comments comment={comment} key={comment.id} />
+          ))}
+        </div>
+      );
     }
-  }, [dispatch, selectedSubreddit]);
-
-
-  const handleToggleComments = (index, permalink) => {
-    dispatch(toggleShowingComments(index));
-    if (!posts[index].showingComments) {
-      dispatch(fetchComments(index, permalink));
-    }
+    return null;
   };
 
-  if (error) {
-    return (
-      <div className="error">
-        <h2>Failed to load posts.</h2>
-        <button
-          type="button"
-          onClick={() => dispatch(fetchPosts(selectedSubreddit.url))}
-        >
-          Try again
-        </button>
-      </div>
-    );
-  }
-
-  if (posts.length === 0) {
-    return (
-      <div className="error">
-        <h2>No posts matching "{searchTerm}"</h2>
-        <button type="button" onClick={() => dispatch(setSearchTerm(''))}>
-          Go home
-        </button>
-      </div>
-    );
-
-  }
-
   return (
-    <div>
-      <ul>
-        {posts.map((post, index) => (
-          <li key={post.id}>
-            <h3>{post.title}</h3>
-            <div className="post-image-container">
-              <img src={post.url} alt="" className="post-image" />
-            </div>
-            <p>{post.selftext}</p>
-            <button onClick={() => handleToggleComments(index, post.permalink)}>
-              {post.showingComments ? `Hide Comments (${post.comments.length})` : `Show Comments (${post.comments.length})`}
-            </button>
-            {post.showingComments && (
-              <div>
-                {post.comments.map((comment) => (
-                  <Comments comment={comment} key={comment.id} />
-                ))}
-              </div>
-            )}
-          </li>
-        ))}
-      </ul>
+      <div className="post-container">
+        <h3 className="post-title">{post.title}</h3>
+
+        <div className="post-image-container">
+          <img src={post.url} alt="" className="post-image" />
+        </div>
+
+      <div className="post-details">
+      <span className="author-username">{post.author}</span>
+      </div>
+      <span className="post-comments-container">
+                <button
+                  type="button"
+                  className={`icon-action-button ${
+                    post.showingComments && 'showing-comments'
+                  }`}
+                  onClick={() => onToggleComments(post.permalink)}
+                  aria-label="Show comments"
+                >
+                </button>
+              </span>
+              {renderComments()}
     </div>
-  );
+    )
 };  
 
 export default PostsList;
