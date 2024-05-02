@@ -27,16 +27,18 @@ const PostsList = (props) => {
 
       <div className="post-details">
       <span className="author-username">{post.author}</span>
+      {post.body}
       </div>
       <span className="post-comments-container">
                 <button
                   type="button"
-                  className={`icon-action-button ${
+                  className={`${
                     post.showingComments && 'showing-comments'
                   }`}
                   onClick={() => onToggleComments(post.permalink)}
                   aria-label="Show comments"
                 >
+                  {post.showingComments ? `Hide Comments (${post.comments.length})` : `Show Comments`}
                 </button>
               </span>
               {renderComments()}

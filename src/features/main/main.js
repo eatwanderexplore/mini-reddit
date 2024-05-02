@@ -6,15 +6,16 @@ import { fetchPosts,
     setSearchTerm, 
     fetchComments } from "../../store/redditSlice";
 
-const Main = () => {
+const Main = ({selectedSubreddit}) => {
     const reddit = useSelector((state) => state.reddit);
-    const { isLoading, error, searchTerm, selectedSubreddit } = reddit;
+    const { isLoading, error, searchTerm } = reddit;
     const posts = useSelector(selectFilteredPosts);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchPosts(selectedSubreddit));
-    }, [selectedSubreddit]);
+      if (selectedSubreddit) {
+        dispatch(fetchPosts(selectedSubreddit.url));}
+    }, [dispatch, selectedSubreddit]);
     
     const onToggleComments = (index) => {
         const getComments = (permalink) => {
@@ -33,7 +34,7 @@ const Main = () => {
         return (
         <>
         <h2>Sorry, error loading posts.</h2>
-        <button type="button" onClick={() => dispatch(fetchPosts(selectedSubreddit))}>
+        <button type="button" onClick={() => dispatch(fetchPosts(selectedSubreddit.url))}>
             Try again
         </button>
         </>);

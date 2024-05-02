@@ -81,8 +81,6 @@ export const fetchPosts = (subreddit) => async (dispatch) => {
     dispatch(startGetPosts());
     const posts = await getSubredditPosts(subreddit);
 
-    //console.log('API Response:', posts); //log API response
-
     // We are adding showingComments and comments as additional fields to handle showing them when the user wants to. We need to do this because we need to call another API endpoint to get the comments for each post.
     const postsWithMetadata = posts.map((post) => ({
       ...post,
@@ -102,8 +100,8 @@ export const fetchComments = (index, permalink) => async (dispatch) => {
     dispatch(startGetComments(index));
     const comments = await getPostComments(permalink);
 
-    console.log('API comments:', comments);
-    console.log('Comment Body:', comments.map(comment => comment.body));
+    //console.log('API comments:', comments);
+    //console.log('Comment Body:', comments.map(comment => comment.body));
 
     dispatch(getCommentsSuccess({ index, comments }));
   } catch (error) {

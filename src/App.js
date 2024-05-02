@@ -3,7 +3,7 @@ import { FaReddit } from "react-icons/fa";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import DropdownMenu from './features/subreddit/subredditDropdown';
 import Search from './features/search/search';
-import PostsList from './features/Posts/postsList';
+import Main from './features/main/main';
 import React, {useState} from 'react';
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
      
       <div className='dropdown'>
         <DropdownMenu onSubredditSelect={handleSubredditSelect}/>
-        {selectedSubreddit && <PostsList selectedSubreddit={selectedSubreddit} />}
+        {selectedSubreddit && <Main selectedSubreddit={selectedSubreddit} />}
       </div>
     </div>
   );
