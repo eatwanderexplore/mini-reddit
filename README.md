@@ -1,3 +1,29 @@
+# Build Your Own Reddit App
+
+Codecademy instructions: For this project, you will build an application for Reddit using everything you’ve learned, including React and Redux. Reddit is a website where people share links to articles, media and other things on the web. The Reddit API provides data which you will integrate into your application. The application will allow users to view and search posts and comments provided by the API.
+
+# Languages used
+
+Mini-reddit uses javascript, React, Redux, html, and a bit of css. It uses the Redux store to manage state and slices. 
+
+# Wireframe
+
+Components include Search, Posts, Comments, Subreddit dropdown, and a Home/Main. The Main component was necessary for the comments to render properly. Without it, the comments were not being called correctly and therefore not displaying. Once the Main component was set up, the PostsList component was able to fetch both the posts and comments.
+
+# Site Deployment
+
+The site is deployed through netlify. It is connected directly to github and pulls from the mini-reddit repository.
+
+# Features
+
+At the top of the page there is a search bar. It searches the page locally, so a subreddit is needed to be chosen first. The subreddits are in a dropdown menu under the header. The subreddits could have been listed on the top of the page or in a sidebar menu, but I liked the look and feel of the dropdown menu. The page is simple and I didn't want too much clutter on the page. 
+
+Once a subreddit is chosen, the posts for the subreddit are displayed. There is a comment button under each post which toggles showing/hiding the comments when clicked. 
+
+# Future Work
+
+I shall continue working on my knowledge of JS, React, and Redux, as well as improving the CSS at a later time. 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
