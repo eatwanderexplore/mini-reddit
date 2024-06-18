@@ -1,7 +1,7 @@
 {
   "name": "mini-reddit",
   "version": "0.1.0",
-  "homepage": "https://eatwanderexplore.gihub.io/mini-reddit"
+  "homepage": "https://eatwanderexplore.gihub.io/mini-reddit",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.2",
@@ -18,7 +18,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
