@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/mini-reddit/static/css/main.b5b17075.css",
+    "main.js": "/mini-reddit/static/js/main.d4a8f3ce.js",
+    "static/js/453.55df1e6c.chunk.js": "/mini-reddit/static/js/453.55df1e6c.chunk.js",
+    "index.html": "/mini-reddit/index.html",
+    "main.b5b17075.css.map": "/mini-reddit/static/css/main.b5b17075.css.map",
+    "main.d4a8f3ce.js.map": "/mini-reddit/static/js/main.d4a8f3ce.js.map",
+    "453.55df1e6c.chunk.js.map": "/mini-reddit/static/js/453.55df1e6c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b5b17075.css",
+    "static/js/main.d4a8f3ce.js"
+  ]
+}
