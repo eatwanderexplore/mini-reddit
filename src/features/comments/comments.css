@@ -1,4 +1,14 @@
+.comment-container{
+    display: inline-block;
+    vertical-align: top;
+    width: 350px;
+    margin: 5px;
+}
 .comment-author {
     color: white;
     background-color: red;
+}
+
+.comment-body {
+    background-color: black;
 }
