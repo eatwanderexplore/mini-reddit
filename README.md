@@ -12,7 +12,7 @@ Components include Search, Posts, Comments, Subreddit dropdown, and a Home/Main.
 
 # Site Deployment
 
-The site is deployed through netlify. It is connected directly to github and pulls from the mini-reddit repository.
+The site is deployed through github pages. It is connected directly to github and pulls from the mini-reddit repository.
 
 # Features
 
